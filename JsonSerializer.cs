@@ -191,7 +191,12 @@ namespace fastJSON
             // datetime format standard : yyyy-MM-dd HH:mm:ss
             DateTime dt = dateTime;
             if (_params.UseUTCDateTime)
-                dt = dateTime.ToUniversalTime();
+            {
+                if (dt.Kind == DateTimeKind.Unspecified)
+                    DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+                else
+                    dt = dateTime.ToUniversalTime();
+            }
 
             _output.Append('\"');
             _output.Append(dt.Year.ToString("0000", NumberFormatInfo.InvariantInfo));
