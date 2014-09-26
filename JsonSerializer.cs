@@ -211,7 +211,8 @@ namespace fastJSON
             _output.Append(':');
              _output.Append(dt.Second.ToString("00", NumberFormatInfo.InvariantInfo));
             _output.Append('.');
-            _output.Append(dt.Millisecond.ToString("000000", NumberFormatInfo.InvariantInfo));
+            int microSeconds = dt.Millisecond * 1000;
+            _output.Append(microSeconds.ToString("000000", NumberFormatInfo.InvariantInfo));
             _output.Append("-00");
 
             _output.Append('\"');
